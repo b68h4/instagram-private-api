@@ -224,7 +224,7 @@ export class Request {
             // "Cache-Control": "no-cache",
             "X-FB-Client-IP": "True",
             "X-FB-Server-Cluster": "True",
-            "IG-INTENDED-USER-ID": this.client.state.cookieUserId,
+            //"IG-INTENDED-USER-ID": this.client.state.cookieUserId,
             "X-IG-Nav-Chain": "9MV:self_profile:2,ProfileMediaTabFragment:self_profile:3,9Xf:self_following:4",
             "X-IG-SALT-IDS": random(1061162222, 1061262222).toString(),
         };
