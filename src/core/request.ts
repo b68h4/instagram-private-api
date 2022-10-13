@@ -217,7 +217,7 @@ export class Request {
             "X-MID": "YRwa1QABBAF-ZA-1tPmnd0bEniTe",  // değişecek
             "Accept-Encoding": "gzip, deflate",  // ignore zstd
             Authorization: this.client.state.authorization,
-            Host: 'i.instagram.com'
+            Host: 'i.instagram.com',
             "X-FB-HTTP-Engine": "Liger",
             "Connection": "keep-alive",
             // "Pragma": "no-cache",
