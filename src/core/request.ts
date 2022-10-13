@@ -179,8 +179,57 @@ export class Request {
       throw new IgNetworkError(err);
     }
   }
-
   public getDefaultHeaders() {
+       return {
+            "X-IG-App-Locale": "en-US",
+            "X-IG-Device-Locale": "en-US",
+            "X-IG-Mapped-Locale": "en-US",
+            'X-Pigeon-Session-Id': this.client.state.pigeonSessionId,
+            "X-Pigeon-Rawclienttime": (Math.floor(Date.now() / 1000).toFixed(3)).toString(),
+            'X-IG-Connection-Speed': `${random(1000, 3700)}kbps`,
+            // "X-IG-Connection-Speed": "-1kbps",
+            //"X-IG-Bandwidth-Speed-KBPS": (this.getRndInteger(2500000, 3000000) / 1000).toString(),  // "-1.000"
+            //"X-IG-Bandwidth-TotalBytes-B": (this.getRndInteger(5000000, 90000000)).toString(),  // "0"
+            //"X-IG-Bandwidth-TotalTime-MS": (this.getRndInteger(2000, 9000)).toString(),  // "0"
+            'X-IG-Bandwidth-Speed-KBPS': '-1.000',
+            'X-IG-Bandwidth-TotalBytes-B': '0',
+            'X-IG-Bandwidth-TotalTime-MS': '0',
+            // "X-IG-EU-DC-ENABLED": "true", // <- type of DC? Eu is euro, but we use US
+              'X-IG-EU-DC-ENABLED':
+                typeof this.client.state.euDCEnabled === 'undefined' ? void 0 : this.client.state.euDCEnabled.toString(),
+            // "X-IG-Prefetch-Request": "foreground",  // OLD from instabot
+            "X-IG-App-Startup-Country": "US",
+            "X-Bloks-Version-Id": "", // değişecek
+            // X-IG-WWW-Claim: hmac.AR3zruvyGTlwHvVd2ACpGCWLluOppXX4NAVDV-iYslo9CaDd
+            'X-IG-WWW-Claim': this.client.state.igWWWClaim || '0',
+            "X-Bloks-Is-Layout-RTL": "false",
+            "X-Bloks-Is-Panorama-Enabled": "true",
+            "X-IG-Device-ID": "8463ec54-527c-4c38-bf61-81662f56625f", // değişecek
+            "X-IG-Family-Device-ID": "239fef57-5809-4322-a940-02835de9c3af", // değişecek
+            "X-IG-Android-ID": "android-fc714e971b52be20", // değişecek
+            "X-IG-Timezone-Offset": "-14400", // DEĞİŞECK
+            "X-IG-Connection-Type": "mobile-3g",
+            "X-IG-Capabilities": "3brTvx0=",  // "3brTvwE=" in instabot
+            "X-IG-App-ID": "203.0.0.29.118",
+            "Priority": "u=3",
+            "User-Agent": "Instagram 203.0.0.29.118 Android (26/8.0.0; 480dpi; 1080x1920; Xiaomi; MI 5s; capricorn; qcom; en_US; 314665256)", // değişecek
+            "Accept-Language": 'en-US',
+            "X-MID": "YRwa1QABBAF-ZA-1tPmnd0bEniTe",  // değişecek
+            "Accept-Encoding": "gzip, deflate",  // ignore zstd
+            Authorization: this.client.state.authorization,
+            Host: 'i.instagram.com'
+            "X-FB-HTTP-Engine": "Liger",
+            "Connection": "keep-alive",
+            // "Pragma": "no-cache",
+            // "Cache-Control": "no-cache",
+            "X-FB-Client-IP": "True",
+            "X-FB-Server-Cluster": "True",
+            "IG-INTENDED-USER-ID": this.client.state.cookieUserId,
+            "X-IG-Nav-Chain": "9MV:self_profile:2,ProfileMediaTabFragment:self_profile:3,9Xf:self_following:4",
+            "X-IG-SALT-IDS": (this.getRndInteger(1061162222, 1061262222)).toString(),
+        };
+  }
+  public getDefaultHeadersV1() {
     return {
       'User-Agent': this.client.state.appUserAgent,
       'X-Ads-Opt-Out': this.client.state.adsOptOut ? '1' : '0',
